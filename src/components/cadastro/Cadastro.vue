@@ -1,13 +1,9 @@
 <template>
-  <h2 class="centralizado">Cadastro</h2>
+  <div><h2 class="centralizado">Cadastro</h2></div>
 </template>
 
 <script>
-import { defineComponent } from "@vue/composition-api";
-
-export default defineComponent({
-  setup() {},
-});
+export default {};
 </script>
 
 <style lang="sss" scoped>
