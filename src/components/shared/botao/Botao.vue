@@ -1,17 +1,45 @@
+<!-- alurapic/src/components/shared/botao/Bota.vue -->
+
 <template>
-  <button @click="disparaAcao()" class="botao botao-perigo" :type="tipo">
+  <button
+    class="botao"
+    :class="estiloDoBotao"
+    :type="tipo"
+    @click="disparaAcao()"
+  >
     {{ rotulo }}
   </button>
 </template>
-
 <script>
 export default {
-  props: ["tipo,", "rotulo", "confirmacao"],
+  props: {
+    tipo: {
+      required: true,
+      type: String,
+    },
 
+    rotulo: {
+      required: true,
+      type: String,
+    },
+
+    confirmacao: {
+      required: false,
+      default: false,
+      type: Boolean,
+    },
+
+    estilo: {
+      required: false,
+      default: "padrao",
+      type: String,
+    },
+  },
   methods: {
     disparaAcao() {
+      console.log(typeof this.confirmacao);
       if (this.confirmacao) {
-        if (confirm("Confirma operação?")) {
+        if (confirm("Confirma operacao?")) {
           this.$emit("botaoAtivado");
         }
         return;
@@ -19,8 +47,17 @@ export default {
       this.$emit("botaoAtivado");
     },
   },
+
+  computed: {
+    estiloDoBotao() {
+      // se o valor é padrão ou não passou nada para estilo
+      if (this.estilo == "padrao" || !this.estilo) return "botao-padrao";
+
+      if (this.estilo == "perigo") return "botao-perigo";
+    },
+  },
 };
-</script>
+</script>    
 
 <style scoped>
 .botao {
